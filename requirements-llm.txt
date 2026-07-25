@@ -1,0 +1,7 @@
+-r requirements.txt
+
+# Optional transformer-based summarization and model experiments.
+# On Windows, enable long paths before installing if pip reports path length errors.
+transformers==4.47.1
+torch==2.5.1
+keybert==0.8.5

@@ -1,0 +1,12 @@
+{
+  "name": "news-summarizer-system",
+  "version": "1.0.0",
+  "private": true,
+  "scripts": {
+    "install:all": "npm install --prefix frontend",
+    "dev:frontend": "npm run dev --prefix frontend",
+    "dev:backend": "uvicorn backend.app:app --reload --port 8000",
+    "test:backend": "pytest -q",
+    "evaluate": "python scripts/evaluate.py"
+  }
+}

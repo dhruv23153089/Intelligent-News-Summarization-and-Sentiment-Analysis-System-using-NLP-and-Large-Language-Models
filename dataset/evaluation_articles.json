@@ -1,0 +1,14 @@
+[
+  {
+    "article": "A city council approved a new electric bus program on Monday. The first twenty buses will serve busy routes from September. Officials expect the change to reduce diesel pollution near schools. The transport department will publish monthly reliability data and expand the fleet if the pilot succeeds.",
+    "reference_summary": "The city approved an electric bus pilot that starts with twenty buses in September and will be evaluated using monthly reliability data."
+  },
+  {
+    "article": "Researchers released a study of early flood alerts for coastal villages. The model combines river gauges, satellite images and local rainfall reports. In tests, it provided warnings several hours earlier than the previous system. The team said communities will help validate alerts before any national rollout.",
+    "reference_summary": "A study found that a model using gauges, satellite data and rainfall reports delivered earlier flood warnings in tests."
+  },
+  {
+    "article": "A public university opened a new data science laboratory this week. Students will work with local hospitals on privacy-preserving research projects. The laboratory also offers evening workshops for teachers and small businesses. Funding covers equipment and scholarships for three years.",
+    "reference_summary": "A university opened a data science lab for privacy-preserving community research, workshops and scholarships."
+  }
+]
