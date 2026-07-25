@@ -1,3 +1,4 @@
+import os
 from pathlib import Path
 
 from dotenv import load_dotenv
@@ -9,6 +10,12 @@ from backend.routes.ingestion import router as ingestion_router
 
 
 load_dotenv(Path(__file__).resolve().parent / ".env")
+
+allowed_origins = [
+    origin.strip()
+    for origin in os.getenv("CORS_ORIGINS", "").split(",")
+    if origin.strip()
+]
 
 app = FastAPI(
     title="Intelligent News Summarization and Sentiment Analysis System",
@@ -23,6 +30,7 @@ app.add_middleware(
         r"https?://(localhost|127\.0\.0\.1|10(?:\.\d{1,3}){3}|"
         r"192\.168(?:\.\d{1,3}){2}|172\.(?:1[6-9]|2\d|3[0-1])(?:\.\d{1,3}){2}):\d+"
     ),
+    allow_origins=allowed_origins,
     allow_credentials=True,
     allow_methods=["*"],
     allow_headers=["*"],
