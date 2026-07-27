@@ -32,7 +32,7 @@ function App() {
   const [articleText, setArticleText] = useState(sampleArticle);
   const [title, setTitle] = useState('AI climate forecasting pilot announced in India');
   const [url, setUrl] = useState('');
-  const [newsQuery, setNewsQuery] = useState('technology');
+  const [newsQuery, setNewsQuery] = useState('');
   const [question, setQuestion] = useState('What is the conclusion?');
   const [answer, setAnswer] = useState(null);
   const [result, setResult] = useState(null);
@@ -184,6 +184,59 @@ function App() {
 
       {error && <div className="error-banner">{error}</div>}
 
+      <section className="news-source-bar" aria-label="Fetch news source">
+        <div className="source-bar-heading">
+          <p className="eyebrow">Live news</p>
+          <h2>Fetch an article before analysis</h2>
+        </div>
+        <div className="source-bar-controls">
+          <div className="source-bar-field">
+            <Globe2 size={18} />
+            <input
+              value={url}
+              onChange={(event) => setUrl(event.target.value)}
+              onKeyDown={(event) => event.key === 'Enter' && handleFetchUrl()}
+              placeholder="Paste a news article URL"
+              aria-label="News article URL"
+            />
+            <button className="secondary-button" onClick={handleFetchUrl} disabled={loading === 'url'}>
+              {loading === 'url' ? <Loader2 className="spin" size={17} /> : <Search size={17} />}
+              Fetch URL
+            </button>
+          </div>
+          <div className="source-bar-field latest-news-field">
+            <FileText size={18} />
+            <input
+              value={newsQuery}
+              onChange={(event) => setNewsQuery(event.target.value)}
+              onKeyDown={(event) => event.key === 'Enter' && handleLatestNews()}
+              placeholder="Topic, e.g. climate or technology"
+              aria-label="Latest news topic"
+            />
+            <button className="secondary-button" onClick={handleLatestNews} disabled={loading === 'latest'}>
+              {loading === 'latest' ? <Loader2 className="spin" size={17} /> : <Play size={17} />}
+              Fetch latest news
+            </button>
+          </div>
+        </div>
+        {latestNews.length > 0 && (
+          <div className="latest-list latest-news-results">
+            {latestNews.map((item, index) => (
+              <button
+                key={`${item.title}-${index}`}
+                onClick={() => {
+                  setTitle(item.title || 'Latest news');
+                  setArticleText([item.title, item.description, item.content].filter(Boolean).join('\n\n'));
+                }}
+              >
+                <span>{item.title}</span>
+                <small>{item.description || 'Select this story to load it for analysis.'}</small>
+              </button>
+            ))}
+          </div>
+        )}
+      </section>
+
       <main className="workspace">
         <section className="input-panel">
           <div className="panel-header">
@@ -211,23 +264,6 @@ function App() {
             placeholder="Paste article text here..."
           />
 
-          <div className="source-grid">
-            <div className="inline-control">
-              <Globe2 size={17} />
-              <input value={url} onChange={(event) => setUrl(event.target.value)} placeholder="Enter news URL" />
-              <button onClick={handleFetchUrl} disabled={loading === 'url'} title="Fetch URL">
-                {loading === 'url' ? <Loader2 className="spin" size={16} /> : <Search size={16} />}
-              </button>
-            </div>
-            <div className="inline-control">
-              <FileText size={17} />
-              <input value={newsQuery} onChange={(event) => setNewsQuery(event.target.value)} placeholder="NewsAPI query" />
-              <button onClick={handleLatestNews} disabled={loading === 'latest'} title="Fetch latest news">
-                {loading === 'latest' ? <Loader2 className="spin" size={16} /> : <Play size={16} />}
-              </button>
-            </div>
-          </div>
-
           <label className="model-toggle" title="Requires ENABLE_TRANSFORMERS=true in the backend environment">
             <input
               type="checkbox"
@@ -237,22 +273,6 @@ function App() {
             Generate optional transformer summary
           </label>
 
-          {latestNews.length > 0 && (
-            <div className="latest-list">
-              {latestNews.slice(0, 4).map((item, index) => (
-                <button
-                  key={`${item.title}-${index}`}
-                  onClick={() => {
-                    setTitle(item.title || 'Latest news');
-                    setArticleText([item.title, item.description, item.content].filter(Boolean).join('\n\n'));
-                  }}
-                >
-                  <span>{item.title}</span>
-                  <small>{item.description}</small>
-                </button>
-              ))}
-            </div>
-          )}
         </section>
 
         <section className="results-panel">
@@ -337,23 +357,25 @@ function App() {
             </div>
             <History size={18} />
           </div>
-          {history.length === 0 ? (
-            <p className="muted">Analyzed articles are saved locally in this browser.</p>
-          ) : (
-            history.map((item) => (
-              <button
-                className="history-item"
-                key={item.id}
-                onClick={() => {
-                  setTitle(item.title);
-                  setArticleText(item.text);
-                }}
-              >
-                <strong>{item.title}</strong>
-                <span>{item.category} · {item.sentiment}</span>
-              </button>
-            ))
-          )}
+          <div className="history-list">
+            {history.length === 0 ? (
+              <p className="muted">Analyzed articles are saved locally in this browser.</p>
+            ) : (
+              history.map((item) => (
+                <button
+                  className="history-item"
+                  key={item.id}
+                  onClick={() => {
+                    setTitle(item.title);
+                    setArticleText(item.text);
+                  }}
+                >
+                  <strong>{item.title}</strong>
+                  <span>{item.category} · {item.sentiment}</span>
+                </button>
+              ))
+            )}
+          </div>
         </aside>
       </main>
     </div>
