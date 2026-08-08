@@ -107,14 +107,14 @@ The project is designed as an interactive news-analysis workspace rather than a 
 
 ```text
 ┌─────────────────────────────────────────────────────────────────┐
-│ React + Vite: News Intelligence Studio                           │
-│ Discover · Intelligence · Trending · Analytics · Saved           │
+│ React + Vite: News Intelligence Studio                          │
+│ Discover · Intelligence · Trending · Analytics · Saved          │
 └───────────────────────────────┬─────────────────────────────────┘
                                 │ HTTP requests to /api
 ┌───────────────────────────────▼─────────────────────────────────┐
-│ FastAPI application                                               │
-│ analysis routes: /analyze, /ask                                  │
-│ ingestion routes: /upload, /fetch-url, /latest-news              │
+│ FastAPI application                                             │
+│ analysis routes: /analyze, /ask                                 │
+│ ingestion routes: /upload, /fetch-url, /latest-news             │
 └──────────┬────────────────────┬───────────────────────┬─────────┘
            │                    │                       │
 ┌──────────▼─────────┐ ┌────────▼─────────┐ ┌──────────▼──────────┐
@@ -123,8 +123,8 @@ The project is designed as an interactive news-analysis workspace rather than a 
 └──────────┬─────────┘ └────────┬─────────┘ └─────────────────────┘
            │                    │
 ┌──────────▼─────────┐ ┌────────▼─────────────────────────────────┐
-│ NewsData.io /      │ │ Summaries · sentiment · entities ·        │
-│ NewsAPI.org        │ │ keywords · category · statistics          │
+│ NewsData.io /      │ │ Summaries · sentiment · entities ·       │
+│ NewsAPI.org        │ │ keywords · category · statistics         │
 └────────────────────┘ └──────────────────────────────────────────┘
 ```
 
