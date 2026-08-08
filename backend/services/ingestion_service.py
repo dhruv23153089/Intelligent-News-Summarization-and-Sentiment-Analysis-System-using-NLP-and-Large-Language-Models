@@ -17,6 +17,24 @@ ARTICLE_HEADERS = {
 }
 
 
+def _unique_articles(articles: list[dict]) -> list[dict]:
+    """Keep the first instance of each article returned by a news provider."""
+    unique_articles = []
+    seen_titles = set()
+    seen_urls = set()
+    for article in articles:
+        title = " ".join((article.get("title") or "").lower().split())
+        url = (article.get("url") or article.get("link") or "").strip().lower()
+        if (title and title in seen_titles) or (url and url in seen_urls):
+            continue
+        if title:
+            seen_titles.add(title)
+        if url:
+            seen_urls.add(url)
+        unique_articles.append(article)
+    return unique_articles
+
+
 async def read_upload(file: UploadFile) -> str:
     content = await file.read()
     filename = (file.filename or "").lower()
@@ -76,6 +94,8 @@ def fetch_url_text(url: str) -> dict:
 
 
 def fetch_latest_news(query: str = "technology", country: str = "us") -> dict:
+    query = (query or "").strip() or "technology"
+    country = (country or "").strip() or "us"
     api_key = os.getenv("NEWS_API_KEY")
     if not api_key:
         return {
@@ -112,7 +132,7 @@ def fetch_latest_news(query: str = "technology", country: str = "us") -> dict:
         data = response.json()
     except ValueError as exc:
         raise ValueError("NewsAPI returned an unreadable response.") from exc
-    return {"source": "newsapi", "articles": data.get("articles", [])}
+    return {"source": "newsapi", "articles": _unique_articles(data.get("articles", []))}
 
 
 def _fetch_newsdata(api_key: str, query: str, country: str) -> dict:
@@ -151,4 +171,4 @@ def _fetch_newsdata(api_key: str, query: str, country: str) -> dict:
         }
         for item in data.get("results", [])
     ]
-    return {"source": "newsdata", "articles": articles}
+    return {"source": "newsdata", "articles": _unique_articles(articles)}
