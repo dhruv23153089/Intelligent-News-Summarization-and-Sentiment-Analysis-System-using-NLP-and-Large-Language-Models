@@ -1154,6 +1154,21 @@ textarea.text-input {
   margin-bottom: var(--space-2xl);
 }
 
+.trending-topics-grid {
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: var(--space-xl);
+  margin-bottom: var(--space-3xl);
+}
+
+.trending-topic-footer {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: var(--space-sm);
+  margin-top: var(--space-md);
+}
+
 .stat-kpi-card {
   display: flex;
   flex-direction: column;
@@ -1268,6 +1283,9 @@ textarea.text-input {
   .stats-strip {
     grid-template-columns: repeat(3, 1fr);
   }
+  .trending-topics-grid {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
   .saved-items-grid {
     grid-template-columns: 1fr;
   }
@@ -1286,6 +1304,7 @@ textarea.text-input {
     grid-template-columns: minmax(0, 1fr) auto;
     gap: var(--space-sm) var(--space-md);
   }
+  .nav-logo { grid-column: 1; grid-row: 1; }
   .nav-logo {
     min-width: 0;
     font-size: 16px;
@@ -1312,7 +1331,12 @@ textarea.text-input {
   .nav-link.active::after {
     bottom: -5px;
   }
-  .nav-actions { gap: var(--space-sm); }
+  .nav-actions {
+    grid-column: 2;
+    grid-row: 1;
+    gap: var(--space-sm);
+    justify-self: end;
+  }
   .nav-actions .btn-primary {
     padding: 8px 10px !important;
     font-size: 0 !important;
@@ -1353,6 +1377,14 @@ textarea.text-input {
   .stats-strip {
     grid-template-columns: repeat(2, 1fr);
   }
+  .trending-topics-grid {
+    grid-template-columns: 1fr;
+    gap: var(--space-md);
+    margin-bottom: var(--space-2xl);
+  }
+  .trending-topics-grid .card-white {
+    min-width: 0;
+  }
   .compare-selector {
     flex-direction: column;
     align-items: stretch;
@@ -1392,7 +1424,6 @@ textarea.text-input {
   .dark-insights-grid { padding: 0 var(--space-md); }
   .category-chart-content { height: auto; min-height: 240px; flex-direction: column; justify-content: center; gap: var(--space-md); }
   .category-chart-content svg { flex: 0 0 auto; }
-  .stats-strip {
-    grid-template-columns: 1fr;
-  }
+  .stat-kpi-card { min-width: 0; }
+  .stat-kpi-val { font-size: 28px; }
 }

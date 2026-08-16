@@ -1456,7 +1456,7 @@ function App() {
             </div>
 
             {/* List of trending topics cards */}
-            <div style={{ display: 'grid', gridTemplateColumns: 'repeat(4, 1fr)', gap: '20px', marginBottom: '40px' }}>
+            <div className="trending-topics-grid">
               {[
                 { topic: 'Artificial Intelligence', volume: '+42%', polarity: 'Neutral', bg: 'var(--canvas-soft)', border: 'var(--border)' },
                 { topic: 'Global Markets', volume: '+28%', polarity: 'Positive', bg: 'var(--canvas-soft)', border: 'var(--border)' },
@@ -1466,7 +1466,7 @@ function App() {
                 <div className="card-white" key={i} style={{ borderLeft: '3px solid var(--primary)' }}>
                   <span className="caption" style={{ fontWeight: 'bold', color: 'var(--primary)' }}>{t.volume} Volume</span>
                   <h3 className="display-xs" style={{ fontSize: '18px', marginTop: '4px' }}>{t.topic}</h3>
-                  <div style={{ display: 'flex', justifyContent: 'between', alignItems: 'center', marginTop: '12px' }}>
+                  <div className="trending-topic-footer">
                     <span className="caption">Polarity: <strong>{t.polarity}</strong></span>
                     <button className="btn-icon" style={{ width: '28px', height: '28px', borderRadius: '4px' }} onClick={() => {
                       setGlobalSearchQuery(t.topic);
