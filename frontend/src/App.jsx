@@ -819,7 +819,7 @@ function App() {
               </div>
 
               {/* Progress Flow Blocks */}
-              <div style={{ display: 'grid', gridTemplateColumns: 'repeat(5, 1fr)', gap: '16px', position: 'relative', marginTop: '32px' }}>
+              <div className="pipeline-grid">
                 {[
                   { num: '01', title: 'Collect', desc: 'Fetch web articles, text uploads, or copy-pasted blocks.' },
                   { num: '02', title: 'Understand', desc: 'Identify syntax, named entities, key phrases, and statistics.' },
@@ -837,7 +837,7 @@ function App() {
             </div>
 
             {/* Feature Highlights Section */}
-            <div style={{ marginTop: '80px', display: 'grid', gridTemplateColumns: 'repeat(3, 1fr)', gap: '24px' }}>
+            <div className="feature-highlights-grid">
               <div className="card-content" style={{ borderLeft: '3px solid var(--primary)' }}>
                 <h3 className="display-xs" style={{ fontSize: '18px', marginBottom: '8px' }}>AI Summarization</h3>
                 <p className="caption" style={{ fontSize: '14px', lineHeight: '1.5' }}>Switch instantly between Brief, Standard, or Detailed summaries. Generate LexRank/TextRank sentences to extract structural arguments without biases.</p>
@@ -1484,8 +1484,9 @@ function App() {
               <span className="eyebrow-uppercase">Consolidated Indicators</span>
               <h3 className="display-xs" style={{ fontSize: '20px', fontWeight: '600', marginBottom: '16px' }}>Sentiment Around Trending Topics</h3>
               
-              <table className="compare-matrix-table">
-                <thead>
+              <div className="table-scroll-wrapper">
+                <table className="compare-matrix-table">
+                  <thead>
                   <tr>
                     <th>Topic Group</th>
                     <th>Volume Change</th>
@@ -1494,8 +1495,8 @@ function App() {
                     <th>Negative %</th>
                     <th>Trend Direction</th>
                   </tr>
-                </thead>
-                <tbody>
+                  </thead>
+                  <tbody>
                   {[
                     { name: 'Generative Models & NLP', change: '+42%', pos: 60, neu: 35, neg: 5, dir: 'UP' },
                     { name: 'US Monetary Interest Rates', change: '+28%', pos: 88, neu: 10, neg: 2, dir: 'UP' },
@@ -1539,8 +1540,9 @@ function App() {
                       </td>
                     </tr>
                   ))}
-                </tbody>
-              </table>
+                  </tbody>
+                </table>
+              </div>
             </div>
           </div>
         )}
@@ -1620,7 +1622,7 @@ function App() {
               {/* Chart 2: Category distribution (SVG Donut layout simulated elegantly) */}
               <div className="card-white">
                 <h3 className="display-xs" style={{ fontSize: '18px', fontWeight: '600', marginBottom: '16px' }}>Category Frequency Distribution</h3>
-                <div style={{ display: 'flex', alignItems: 'center', gap: '32px', height: '240px' }}>
+                <div className="category-chart-content">
                   {/* Circular SVG Donut */}
                   <svg width="140" height="140" viewBox="0 0 36 36" style={{ transform: 'rotate(-90deg)' }}>
                     <circle cx="18" cy="18" r="15.915" fill="transparent" stroke="var(--border)" strokeWidth="3" />
